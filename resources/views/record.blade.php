@@ -2,14 +2,11 @@
 
 @section('content')
 <div class="container">
-    <div style="margin: 10px 0;">
-        <a class="btn btn-primary" role="button" href="{{ route('share') }}">自分のノートをシェアする</a>
-    </div>
     <div class="row justify-content-center">
 
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">公開中のノート</div>
+                <div class="card-header">購入履歴</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -21,22 +18,23 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th scope="col">日付</th>
+                                <th scope="col">購入時間</th>
                                 <th scope="col">ノートタイトル</th>
                                 <th scope="col">コイン</th>
-                                <th scope="col">購入回数</th>
                                 <th scope="col">操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($notes as $note)
+                            @foreach ($records as $record)
                             <tr>
-                                <th scope="row">{{ $note->created_at }}</th>
+                                @php
+                                $note = App\Note::find($record->note_id);
+                                @endphp
+                                <th scope="row">{{ $record->created_at }}</th>
                                 <td>
-                                    {{ $note->title }} <i class="fas fa-id-badge"></i> {{ App\User::find($note->user_id)->name }}
+                                    {{ $note->title }} / <i class="fas fa-id-badge"></i> {{ App\User::find($note->user_id)->name }}
                                 </td>
                                 <td><i class="fas fa-coins"></i> {{ $note->coin }}</td>
-                                <td>{{ $note->sale }}</td>
                                 @if ($note->user_id == Auth::id() or App\Record::where('user_id', Auth::id())->where('note_id', $note->id)->first())
                                 <td><a role="button" href="{{ $note->filepath }}" class="btn btn-success btn-sm">ダウンロード</a></td>
                                 @else
