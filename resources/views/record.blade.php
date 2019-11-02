@@ -32,7 +32,7 @@
                                 @endphp
                                 <th scope="row">{{ $record->created_at }}</th>
                                 <td>
-                                    {{ $note->title }} / <i class="fas fa-id-badge"></i> {{ App\User::find($note->user_id)->name }}
+                                    {{ $note->title }} <i class="fas fa-id-badge"></i> {{ App\User::find($note->user_id)->name }}
                                 </td>
                                 <td><i class="fas fa-coins"></i> {{ $note->coin }}</td>
                                 @if ($note->user_id == Auth::id() or App\Record::where('user_id', Auth::id())->where('note_id', $note->id)->first())

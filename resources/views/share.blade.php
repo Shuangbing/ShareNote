@@ -24,7 +24,7 @@
                     <label for="exampleFormControlSelect1">ノートファイル</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="inputGroupFile02" name="notefile">
-                        <label class="custom-file-label" for="inputGroupFile02">*.PDFのみ</label>
+                        <label class="custom-file-label" for="inputGroupFile02">2MBまでの*.PDFファイルのみ</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">シェア</button>

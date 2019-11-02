@@ -66,10 +66,10 @@ class HomeController extends Controller
                 $record->save();
                 return redirect()->route('home');
             } else {
-                return 'すでに購入されています';
+                return $this->error('すでに購入されています', route('home'));
             }
         } else {
-            return 'error';
+            return $this->error('購入できません', route('home'));
         }
     }
 
@@ -92,7 +92,7 @@ class HomeController extends Controller
                 $note->save();
                 return redirect()->route('home');
             }
-            return 'アップロード失敗しました';
+            return $this->error('アップロードできませんでした', route('home'));
         }
         return view('share');
     }

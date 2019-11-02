@@ -41,10 +41,10 @@
                                 <td><a role="button" href="{{ $note->filepath }}" class="btn btn-success btn-sm">ダウンロード</a></td>
                                 @else
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#noteModal-{{$note->id}}">
                                         購入
                                     </button>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="noteModal-{{$note->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
