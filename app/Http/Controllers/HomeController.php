@@ -45,6 +45,17 @@ class HomeController extends Controller
         return view('record', ['records' => $records]);
     }
 
+    public function download(Request $request, $id)
+    {
+        $note = Note::find($id);
+        $user_id = Auth::id();
+        if ($note->user_id == $user_id or Record::where('user_id', $user_id)->where('note_id', $note->id)->first()) {
+            return Storage::download($note->filepath, $note->title . '.pdf');
+        } else {
+            return $this->error('購入されていません', route('home'));
+        }
+    }
+
     public function purchase(Request $request, $id)
     {
         $note = Note::find($id);
@@ -97,7 +108,7 @@ class HomeController extends Controller
         return view('share');
     }
 
-    public function upload($file, $disk = 'public')
+    public function upload($file, $disk = 'local')
     {
         if (!$file->isValid()) {
             return false;
@@ -113,9 +124,9 @@ class HomeController extends Controller
         if (!is_uploaded_file($tmpFile)) {
             return false;
         }
-        $fileName = date('Y_m_d') . '/' . md5(time()) . mt_rand(0, 9999) . '.' . $fileExtension;
+        $fileName = md5(time()) . mt_rand(0, 9999) . '.' . $fileExtension;
         if (Storage::disk($disk)->put($fileName, file_get_contents($tmpFile))) {
-            return Storage::url($fileName);
+            return $fileName;
         }
     }
 }

@@ -21,3 +21,5 @@ Route::post('/share', 'HomeController@share')->name('share');
 
 Route::get('/purchase', 'HomeController@record')->name('history');
 Route::post('/purchase/{id}', 'HomeController@purchase')->name('purchase');
+
+Route::get('/download/{id}', 'HomeController@download')->name('download');

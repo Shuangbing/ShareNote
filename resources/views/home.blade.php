@@ -38,7 +38,7 @@
                                 <td><i class="fas fa-coins"></i> {{ $note->coin }}</td>
                                 <td>{{ $note->sale }}</td>
                                 @if ($note->user_id == Auth::id() or App\Record::where('user_id', Auth::id())->where('note_id', $note->id)->first())
-                                <td><a role="button" href="{{ $note->filepath }}" class="btn btn-success btn-sm">ダウンロード</a></td>
+                                <td><a role="button" href="{{ route('download', ['id' => $note->id ]) }}" class="btn btn-success btn-sm">ダウンロード</a></td>
                                 @else
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#noteModal-{{$note->id}}">
